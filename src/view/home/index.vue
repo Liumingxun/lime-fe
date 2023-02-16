@@ -1,30 +1,24 @@
 <template>
   <a-layout>
     <a-layout-sider style="width: 50px; height: 100%">
-      <Group/>
+      <LeftGroup/>
     </a-layout-sider>
     <a-layout-sider style="width: 200px; height: 100%">
-      <Channel/>
+      <LeftChannel/>
     </a-layout-sider>
     <a-layout>
-      <a-layout-header>Header</a-layout-header>
-      <a-layout>
-        <a-layout-content>
-          <Message/>
-        </a-layout-content>
-        <a-layout-sider>
-          <Main/>
-        </a-layout-sider>
-      </a-layout>
+      <a-layout-header style="height: 45px">Header</a-layout-header>
+      <a-layout-content>
+        <RightMessage/>
+      </a-layout-content>
     </a-layout>
   </a-layout>
 </template>
 
 <script setup>
-import Group from './compontent/group.vue'
-import Channel from './compontent/channel.vue'
-import Message from './compontent/message.vue'
-import Main from './compontent/main.vue'
+import LeftGroup from './compontent/group.vue'
+import LeftChannel from './compontent/channel.vue'
+import RightMessage from './compontent/message.vue'
 </script>
 
 <style scoped>

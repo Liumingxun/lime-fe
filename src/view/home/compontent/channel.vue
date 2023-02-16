@@ -1,6 +1,6 @@
 <template>
-  <div class="layout">
-    <div class="header">
+  <a-layout>
+    <a-layout-header>
       <a-dropdown @select="handleSelect" :popup-max-height="false" style="width: 175px;">
         <a-button style="width: 100%;position: relative;">No Max Height <icon-down/></a-button>
         <template #content>
@@ -15,10 +15,9 @@
           <a-doption>Option 9</a-doption>
         </template>
       </a-dropdown>
-    </div>
-    <div class="main">
-      <a-scrollbar style="height:368px;overflow: auto;">
-        <div>
+    </a-layout-header>
+    <a-layout-content>
+      <a-scrollbar style="height:calc(100vh - 32px);overflow: auto;">
           <a-menu
               :style="{ width: '200px', height: '100%' }"
               :default-open-keys="['0']"
@@ -42,10 +41,9 @@
               <a-menu-item key="2_1">Menu 2</a-menu-item>
             </a-sub-menu>
           </a-menu>
-        </div>
       </a-scrollbar>
-    </div>
-  </div>
+    </a-layout-content>
+  </a-layout>
 </template>
 
 <script>
@@ -69,13 +67,5 @@ export default {
 <style lang="scss" scoped>
 .arco-dropdown-open .arco-icon-down {
   transform: rotate(180deg);
-}
-.layout{
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  .main{
-    flex-shrink: 0;
-  }
 }
 </style>
