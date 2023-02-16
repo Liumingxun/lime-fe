@@ -41,7 +41,7 @@ export default defineConfig(({ command }) => {
         {
           entry: 'electron/preload/index.ts',
           onstart(options) {
-            // Notify the Renderer-Process to reload the page when the Preload-Scripts build is complete, 
+            // Notify the Renderer-Process to reload the page when the Preload-Scripts build is complete,
             // instead of restarting the entire Electron App.
             options.reload()
           },
@@ -62,13 +62,18 @@ export default defineConfig(({ command }) => {
         nodeIntegration: true,
       }),
     ],
-    server: process.env.VSCODE_DEBUG && (() => {
-      const url = new URL(pkg.debug.env.VITE_DEV_SERVER_URL)
-      return {
-        host: url.hostname,
-        port: +url.port,
+    server: {
+      host: true,
+      proxy: {
+        '/api': {
+          target: 'http://localhost:21380',
+          changeOrigin: true,
+          headers: {
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODIwMzg4MjZmZWY4NjIzOGY5NzQ3YSIsImlhdCI6MTY2OTQ2NDk5MX0.GDuOBra8uemkYin1pFuzYXA1iWjFzzsKojykGrGpYZc'
+          }
+        }
       }
-    })(),
+    },
     clearScreen: false,
   }
 })

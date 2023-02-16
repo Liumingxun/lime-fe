@@ -13,26 +13,25 @@
     "vue3",
     "vue"
   ],
-  "debug": {
-    "env": {
-      "VITE_DEV_SERVER_URL": "http://127.0.0.1:3344/"
-    }
-  },
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build && electron-builder",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@arco-design/web-vue": "^2.43.0",
     "@vitejs/plugin-vue": "^4.0.0",
+    "@vue/devtools": "^6.5.0",
     "electron": "^22.0.3",
     "electron-builder": "^23.6.0",
+    "esbuild": "latest",
+    "sass": "^1.58.1",
     "typescript": "^4.9.4",
     "vite": "^4.0.4",
     "vite-plugin-electron": "^0.11.1",
     "vite-plugin-electron-renderer": "^0.11.4",
     "vue": "^3.2.45",
-    "vue-tsc": "^1.0.24",
-    "esbuild": "latest"
+    "vue-router": "^4.1.6",
+    "vue-tsc": "^1.0.24"
   }
 }
