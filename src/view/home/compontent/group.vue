@@ -1,46 +1,109 @@
 <template>
-  <div class="menu-demo">
-    <a-menu
-        :style="{ width: '200px', height: '100%' }"
-        :default-selected-keys="['1']"
-        :collapsed="true"
-    >
-      <a-menu-item key="1" data-obj="1">
-        <template #icon><icon-apps></icon-apps></template>
-        Menu 1
+  <a-scrollbar style="height: 100vh; overflow: auto">
+    <a-menu collapsed :mode="'vertical'" :default-selected-keys="['1']" :collapsed-width="50">
+      <a-menu-item key="1">
+        <template #icon>
+          <icon-apps></icon-apps>
+        </template>
+        Menu1
       </a-menu-item>
-      <a-menu-item key="2" data-obj="1"><template #icon><icon-apps></icon-apps></template>Menu 2</a-menu-item>
-      <a-menu-item key="3" data-obj="1"><template #icon><icon-apps></icon-apps></template>Menu 3</a-menu-item>
-      <a-menu-item key="4" data-obj="1"><template #icon><icon-apps></icon-apps></template>Menu 4</a-menu-item>
-      <a-menu-item key="5" data-obj="1"><template #icon><icon-apps></icon-apps></template>Menu 5</a-menu-item>
-      <a-menu-item key="5" data-obj="1"><template #icon><icon-apps></icon-apps></template>Menu 5</a-menu-item>
-      <a-menu-item key="5" data-obj="1"><template #icon><icon-apps></icon-apps></template>Menu 5</a-menu-item>
-      <a-menu-item key="5" data-obj="1"><template #icon><icon-apps></icon-apps></template>Menu 5</a-menu-item>
-      <a-menu-item key="5" data-obj="1"><template #icon><icon-apps></icon-apps></template>Menu 5</a-menu-item>
-      <a-menu-item key="5" data-obj="1"><template #icon><icon-apps></icon-apps></template>Menu 5</a-menu-item>
-      <a-menu-item key="5" data-obj="1"><template #icon><icon-apps></icon-apps></template>Menu 5</a-menu-item>
-      <a-menu-item key="5" data-obj="1"><template #icon><icon-apps></icon-apps></template>Menu 5</a-menu-item>
-    </a-menu>
-  </div>
-</template>
-<script>
-import { IconApps } from '@arco-design/web-vue/es/icon';
+      <a-menu-item key="2">
+        <template #icon>
+          <icon-apps></icon-apps>
+        </template>
+        Menu2
+      </a-menu-item>
+      <a-menu-item key="3">
+        <template #icon>
+          <icon-apps></icon-apps>
+        </template>
+        Menu3
+      </a-menu-item>
+      <a-menu-item key="4">
+        <template #icon>
+          <icon-apps></icon-apps>
+        </template>
+        Menu4
+      </a-menu-item>
+      <a-menu-item key="5">
+        <template #icon>
+          <icon-apps></icon-apps>
+        </template>
+        Menu5
+      </a-menu-item>
+      <a-menu-item key="6">
+        <template #icon>
+          <icon-apps></icon-apps>
+        </template>
+        Menu6
+      </a-menu-item>
+      <a-menu-item key="7">
+        <template #icon>
+          <icon-apps></icon-apps>
+        </template>
+        Menu7
+      </a-menu-item>
+      <a-menu-item key="8">
+        <template #icon>
+          <icon-apps></icon-apps>
+        </template>
+        Menu8
+      </a-menu-item>
+      <a-menu-item key="9">
+        <template #icon>
+          <icon-apps></icon-apps>
+        </template>
+        Menu9
+      </a-menu-item>
+      <a-menu-item key="10">
+        <template #icon>
+          <icon-apps></icon-apps>
+        </template>
+        Menu10
+      </a-menu-item>
+      <a-menu-item key="10">
+        <template #icon>
+          <icon-apps></icon-apps>
+        </template>
+        Menu11
+      </a-menu-item>
+      <a-menu-item key="10">
+        <template #icon>
+          <icon-apps></icon-apps>
+        </template>
+        Menu12
+      </a-menu-item>
+      <a-menu-item key="10">
+        <template #icon>
+          <icon-apps></icon-apps>
+        </template>
+        Menu13
+      </a-menu-item>
+      <a-menu-item key="10">
+        <template #icon>
+          <icon-apps></icon-apps>
+        </template>
+        Menu14
+      </a-menu-item>
+      <a-menu-item key="10">
+        <template #icon>
+          <icon-apps></icon-apps>
+        </template>
+        Menu15
+      </a-menu-item>
 
-export default {
-  components: {
-    IconApps,
-  },
-};
+    </a-menu>
+  </a-scrollbar>
+</template>
+<script setup>
+import {IconApps} from '@arco-design/web-vue/es/icon'
 </script>
 <style lang="scss" scoped>
-.menu-demo {
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  background-color: var(--color-neutral-2);
-}
 :deep(.arco-menu-inner) {
-  &::-webkit-scrollbar { width: 0 !important }
+  &::-webkit-scrollbar {
+    width: 0 !important
+  }
+
   -ms-overflow-style: none;
   overflow: -moz-scrollbars-none;
 }

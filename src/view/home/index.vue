@@ -1,9 +1,9 @@
 <template>
   <a-layout>
-    <a-layout-sider style="width: 48px">
+    <a-layout-sider style="width: 50px; height: 100%">
       <Group/>
     </a-layout-sider>
-    <a-layout-sider>
+    <a-layout-sider style="width: 200px; height: 100%">
       <Channel/>
     </a-layout-sider>
     <a-layout>
