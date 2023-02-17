@@ -1,14 +1,5 @@
-<template>
-  <a-scrollbar style="height: calc(100vh - 80px); overflow: auto;">
-    <div style="height: 1200px">
-
-    </div>
-  </a-scrollbar>
-  <a-mention v-model="value" :data="['Bytedance', 'Bytedesign', 'Bytenumner']" placeholder="enter something"/>
-</template>
-
 <script>
-import {ref} from 'vue'
+import { ref } from 'vue'
 
 export default {
   setup() {
@@ -22,6 +13,13 @@ export default {
   },
 }
 </script>
+
+<template>
+  <a-scrollbar style="height: calc(100vh - 80px); overflow: auto;">
+    <div style="height: 1200px" />
+  </a-scrollbar>
+  <a-mention v-model="value" :data="['Bytedance', 'Bytedesign', 'Bytenumner']" placeholder="enter something" />
+</template>
 
 <style scoped>
 
