@@ -14,7 +14,7 @@
     "vue"
   ],
   "scripts": {
-    "dev": "vite",
+    "dev": "vite | vue-devtools",
     "build": "vue-tsc --noEmit && vite build && electron-builder",
     "preview": "vite preview"
   },

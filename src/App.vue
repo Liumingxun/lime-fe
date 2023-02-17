@@ -10,7 +10,9 @@
 </template>
 
 <script setup lang="ts">
+import {getMyChatRoomList} from "./api/chatRoom";
 
+getMyChatRoomList().then(console.log)
 const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
 
 darkThemeMq.addListener(e => {
