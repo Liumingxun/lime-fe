@@ -1,6 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
 import { useRouteMeta } from '../composable'
+import installSessionGuard from './guard/session'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -30,10 +31,6 @@ const router = createRouter({
   routes,
 })
 
-// router.beforeEach((to, from, next) => {
-//     console.log(to.fullPath)
-// })
-
-// installSessionGuard(router)
+installSessionGuard(router)
 
 export default router

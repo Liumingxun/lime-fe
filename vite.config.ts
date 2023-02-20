@@ -1,8 +1,11 @@
 import { rmSync } from 'node:fs'
+import * as path from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import electron from 'vite-plugin-electron'
 import renderer from 'vite-plugin-electron-renderer'
+import unoCss from 'unocss/vite'
+import { presetAttributify, presetUno } from 'unocss'
 import pkg from './package.json'
 
 // https://vitejs.dev/config/
@@ -21,11 +24,7 @@ export default defineConfig(({ command }) => {
           // Main-Process entry file of the Electron App.
           entry: 'electron/main/index.ts',
           onstart(options) {
-            if (process.env.VSCODE_DEBUG) {
-              console.log(/* For `.vscode/.debug.script.mjs` */'[startup] Electron App')
-            } else {
-              options.startup()
-            }
+            options.startup()
           },
           vite: {
             build: {
@@ -55,11 +54,17 @@ export default defineConfig(({ command }) => {
               },
             },
           },
-        }
+        },
       ]),
       // Use Node.js API in the Renderer-process
       renderer({
         nodeIntegration: true,
+      }),
+      unoCss({
+        presets: [
+          presetUno(),
+          presetAttributify(),
+        ],
       }),
     ],
     server: {
@@ -69,10 +74,15 @@ export default defineConfig(({ command }) => {
           target: 'http://localhost:21380',
           changeOrigin: true,
           headers: {
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODIwMzg4MjZmZWY4NjIzOGY5NzQ3YSIsImlhdCI6MTY2OTQ2NDk5MX0.GDuOBra8uemkYin1pFuzYXA1iWjFzzsKojykGrGpYZc'
-          }
-        }
-      }
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODIwMzg4MjZmZWY4NjIzOGY5NzQ3YSIsImlhdCI6MTY2OTQ2NDk5MX0.GDuOBra8uemkYin1pFuzYXA1iWjFzzsKojykGrGpYZc',
+          },
+        },
+      },
+    },
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, 'src'),
+      },
     },
     clearScreen: false,
   }

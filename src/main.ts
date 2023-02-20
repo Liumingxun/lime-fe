@@ -3,9 +3,10 @@ import { connect } from '@vue/devtools'
 import './style.css'
 import ArcoVue from '@arco-design/web-vue'
 import App from './App.vue'
-import '@arco-design/web-vue/dist/arco.css'
 import router from './router'
 import socket from './plugin/socket'
+import '@arco-design/web-vue/dist/arco.css'
+import 'uno.css'
 
 connect()
 

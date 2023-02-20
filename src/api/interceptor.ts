@@ -34,6 +34,11 @@ axios.interceptors.request.use(
 // add response interceptors
 axios.interceptors.response.use(
   (response) => {
+    if (response.status !== 200) {
+      Modal.error({
+        content: response.statusText,
+      })
+    }
     const res = response.data
     // if the custom code is not 20000, it is judged as an error.
     if (!res.success) {

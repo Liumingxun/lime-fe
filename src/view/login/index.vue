@@ -1,23 +1,31 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { reactive } from 'vue'
+import { login } from '@/api/user'
 
 const router = useRouter()
 const form = reactive({
   userId: '',
   password: '',
 })
-const handleSubmit = (data) => {
-  console.log(data)
-  router.push({
-    name: 'Home',
+const handleSubmit = () => {
+  login({
+    username: form.userId,
+    password: form.password,
+  }).then(({ data }) => {
+    if (data.success) {
+      localStorage.setItem('token', data.data.token)
+      router.push({
+        name: 'Home',
+      })
+    }
   })
 }
 </script>
 
 <template>
   <div>
-    <a-form class="login-form" :model="form" layout="vertical" @submit="handleSubmit">
+    <a-form class="w-60 m-auto mt-25" :model="form" layout="vertical" @submit="handleSubmit">
       <div class="login-title">
         <h1>欢迎回来!</h1>
         <div>很高兴再次见到您！</div>
