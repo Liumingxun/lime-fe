@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import LeftGroup from './compontent/group.vue'
 import LeftChannel from './compontent/channel.vue'
 import RightMessage from './compontent/message.vue'

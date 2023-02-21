@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { reactive } from 'vue'
 import { login } from '@/api/user'
@@ -12,7 +12,7 @@ const handleSubmit = () => {
   login({
     username: form.userId,
     password: form.password,
-  }).then(({ data }) => {
+  }).then(({ data }: any) => {
     if (data.success) {
       localStorage.setItem('token', data.data.token)
       router.push({

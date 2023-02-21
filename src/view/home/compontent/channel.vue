@@ -1,11 +1,11 @@
-<script>
+<script lang="ts">
 import { IconDown } from '@arco-design/web-vue/es/icon'
 export default {
   components: {
     IconDown,
   },
   setup() {
-    const handleSelect = (v) => {
+    const handleSelect = (v: any) => {
       console.log(v)
     }
 

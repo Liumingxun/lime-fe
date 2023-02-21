@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { IconApps } from '@arco-design/web-vue/es/icon'
 </script>
 
