@@ -12,8 +12,9 @@ const handleSubmit = () => {
   login({
     username: form.userId,
     password: form.password,
-  }).then(({ data }: any) => {
-    if (data.success) {
+  }).then((data: any) => {
+    console.log(data)
+    if (data.code === 0) {
       localStorage.setItem('token', data.data.token)
       router.push({
         name: 'Home',

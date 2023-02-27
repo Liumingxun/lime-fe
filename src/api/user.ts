@@ -12,8 +12,12 @@ export interface RegisterData {
   username: string
 }
 
+interface loginRes {
+  token: string
+}
+
 export function login(loginData: LoginData) {
-  return axios.post('/api/user/login', loginData)
+  return axios.post<loginRes>('/api/user/login', loginData)
 }
 
 export function register(registerData: RegisterData) {
