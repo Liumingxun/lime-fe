@@ -1,99 +1,27 @@
 <script setup lang="ts">
-import { IconApps } from '@arco-design/web-vue/es/icon'
+import { IconUserGroup } from '@arco-design/web-vue/es/icon'
+import { onBeforeMount, ref } from 'vue'
+import { getMyChatRoomList } from '@/api/chatRoom'
+
+const emit = defineEmits(['chooseChatRoom'])
+
+const chatRoomList = ref([])
+
+onBeforeMount(() => {
+  getMyChatRoomList().then(({ data }) => {
+    chatRoomList.value = data
+  })
+})
 </script>
 
 <template>
   <a-scrollbar style="height: 100vh; overflow: auto">
     <a-menu collapsed mode="vertical" :default-selected-keys="['1']" :collapsed-width="50">
-      <a-menu-item key="1">
+      <a-menu-item v-for="(cr) in chatRoomList" :key="cr.id" @click="emit('chooseChatRoom', cr.id)">
         <template #icon>
-          <IconApps />
+          <IconUserGroup />
         </template>
-        Menu1
-      </a-menu-item>
-      <a-menu-item key="2">
-        <template #icon>
-          <IconApps />
-        </template>
-        Menu2
-      </a-menu-item>
-      <a-menu-item key="3">
-        <template #icon>
-          <IconApps />
-        </template>
-        Menu3
-      </a-menu-item>
-      <a-menu-item key="4">
-        <template #icon>
-          <IconApps />
-        </template>
-        Menu4
-      </a-menu-item>
-      <a-menu-item key="5">
-        <template #icon>
-          <IconApps />
-        </template>
-        Menu5
-      </a-menu-item>
-      <a-menu-item key="6">
-        <template #icon>
-          <IconApps />
-        </template>
-        Menu6
-      </a-menu-item>
-      <a-menu-item key="7">
-        <template #icon>
-          <IconApps />
-        </template>
-        Menu7
-      </a-menu-item>
-      <a-menu-item key="8">
-        <template #icon>
-          <IconApps />
-        </template>
-        Menu8
-      </a-menu-item>
-      <a-menu-item key="9">
-        <template #icon>
-          <IconApps />
-        </template>
-        Menu9
-      </a-menu-item>
-      <a-menu-item key="10">
-        <template #icon>
-          <IconApps />
-        </template>
-        Menu10
-      </a-menu-item>
-      <a-menu-item key="10">
-        <template #icon>
-          <IconApps />
-        </template>
-        Menu11
-      </a-menu-item>
-      <a-menu-item key="10">
-        <template #icon>
-          <IconApps />
-        </template>
-        Menu12
-      </a-menu-item>
-      <a-menu-item key="10">
-        <template #icon>
-          <IconApps />
-        </template>
-        Menu13
-      </a-menu-item>
-      <a-menu-item key="10">
-        <template #icon>
-          <IconApps />
-        </template>
-        Menu14
-      </a-menu-item>
-      <a-menu-item key="10">
-        <template #icon>
-          <IconApps />
-        </template>
-        Menu15
+        {{ cr.name }}
       </a-menu-item>
     </a-menu>
   </a-scrollbar>

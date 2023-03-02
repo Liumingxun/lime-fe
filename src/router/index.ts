@@ -1,7 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
-import { useRouteMeta } from '../composable'
 import installSessionGuard from './guard/session'
+import { useRouteMeta } from '@/composable'
 
 const routes: RouteRecordRaw[] = [
   {
