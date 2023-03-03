@@ -2,39 +2,50 @@
 import { IconDown } from '@arco-design/web-vue/es/icon'
 import { ref, watchEffect } from 'vue'
 import { useToggle } from '@vueuse/core'
+import { storeToRefs } from 'pinia'
 import { getChatRoomDetail } from '@/api/chatRoom'
 import { quitChatRoom } from '@/api/user'
+import { useMainStore } from '@/store'
+import type { Channel, ChannelGroup } from '@/store/modules/main/types'
 
-const props = defineProps<{
-  chatRoomId: string
-}>()
+const mainStore = useMainStore()
+const { selectedChatRoomId, selectedChatRoomDetail } = storeToRefs(mainStore)
 
-const groupList = ref([])
+const groupList = ref<(ChannelGroup & { channel: Channel[] })[]>([])
 const loading = ref(false)
 const chatRoomName = ref('')
 
 watchEffect(async () => {
-  if (!props.chatRoomId)
+  if (!selectedChatRoomId.value)
     return
   loading.value = true
-  const { data } = await getChatRoomDetail(props.chatRoomId)
-  chatRoomName.value = data.name
+  const { data } = await getChatRoomDetail(selectedChatRoomId.value)
+  selectedChatRoomDetail.value = data
+  chatRoomName.value = selectedChatRoomDetail.value!.name
+  groupList.value = selectedChatRoomDetail.value!.group
   loading.value = false
-  groupList.value = data.group
 }, {
   flush: 'sync',
 })
 
 const [confirmModal, toggle] = useToggle(false)
 async function quit() {
-  const { data } = await quitChatRoom(props.chatRoomId)
+  const res: any = await quitChatRoom(selectedChatRoomId.value)
   toggle()
-  return data.code === 0
+  if (res.code === 0) {
+    selectedChatRoomId.value = ''
+    await mainStore.getMyChatRoomList()
+    return true
+  }
+  return false
 }
 </script>
 
 <template>
-  <a-spin :loading="loading">
+  <div v-if="selectedChatRoomId === ''">
+    none
+  </div>
+  <a-spin v-else :loading="loading">
     <a-layout>
       <a-layout-header>
         <a-dropdown :popup-max-height="false" style="width: 175px;">
