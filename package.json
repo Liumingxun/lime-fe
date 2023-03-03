@@ -24,7 +24,7 @@
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/devtools": "^6.5.0",
     "@vueuse/core": "^9.13.0",
-    "electron": "^22.0.3",
+    "electron": "^23.1.1",
     "electron-builder": "^23.6.0",
     "esbuild": "latest",
     "eslint": "^8.34.0",
