@@ -22,8 +22,8 @@ axios.interceptors.request.use(
       if (!config.headers)
         config.headers = {} as AxiosRequestHeaders
 
-      // config.headers.Authorization = token
-      config.headers.Authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODIwMzg4MjZmZWY4NjIzOGY5NzQ3YSIsImlhdCI6MTY2OTQ2NDk5MX0.GDuOBra8uemkYin1pFuzYXA1iWjFzzsKojykGrGpYZc'
+      config.headers.Authorization = token
+      // config.headers.Authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODIwMzg4MjZmZWY4NjIzOGY5NzQ3YSIsImlhdCI6MTY2OTQ2NDk5MX0.GDuOBra8uemkYin1pFuzYXA1iWjFzzsKojykGrGpYZc'
     }
     return config
   },
@@ -70,8 +70,11 @@ axios.interceptors.response.use(
      */
   (error) => {
     Message.error({
-      content: error.response.data.status === 401 ? '>﹏< 登录过期！请重新登录！' : '服务器出错啦！',
+      content: error.response.status === 401 ? '>﹏< 登录过期！请重新登录！' : '服务器出错啦！',
+      onClose() {
+        window.location.reload()
+      },
+      duration: 2 * 1000,
     })
-    return Promise.reject(error)
   },
 )
