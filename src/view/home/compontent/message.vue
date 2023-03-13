@@ -1,16 +1,20 @@
-<script lang="ts">
-import { ref } from 'vue'
+<script lang="ts" setup>
+import { onMounted, ref } from 'vue'
+import { useMainStore } from '@/store'
 
-export default {
-  setup() {
-    const value = ref('')
-    const text = ref('')
+const value = ref('')
+const socket = useMainStore().socket
 
-    return {
-      value,
-      text,
-    }
-  },
+onMounted(() => {
+  socket.emit('ping', Date.now(), (response: unknown) => {
+    const data = response as { spendTime: number; sendTime: number }
+    console.log(`${Date.now() - data.sendTime + data.spendTime}ms`)
+  })
+})
+
+// userid + message
+function sendMessage() {
+  socket.send({})
 }
 </script>
 
@@ -20,10 +24,14 @@ export default {
       Header
     </a-layout-header>
     <a-layout-content>
-      <a-scrollbar style="height: calc(100vh - 80px); overflow: auto;">
+      <a-scrollbar style="height: calc(100vh - 99px); overflow: auto;">
         <div style="height: 1200px" />
       </a-scrollbar>
-      <a-mention v-model="value" :data="['Bytedance', 'Bytedesign', 'Bytenumner']" placeholder="enter something" />
+      <a-mention v-model="value" type="textarea" :data="['Bytedance', 'Bytedesign', 'Bytenumner']" placeholder="enter something" @keydown.enter="sendMessage">
+        <template #option="{ data }">
+          {{ data }}
+        </template>
+      </a-mention>
     </a-layout-content>
   </a-layout>
 </template>

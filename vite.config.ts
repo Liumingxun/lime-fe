@@ -69,15 +69,6 @@ export default defineConfig(({ command }) => {
     ],
     server: {
       host: true,
-      proxy: {
-        '/api': {
-          target: 'http://localhost:21380',
-          changeOrigin: true,
-          headers: {
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODIwMzg4MjZmZWY4NjIzOGY5NzQ3YSIsImlhdCI6MTY2OTQ2NDk5MX0.GDuOBra8uemkYin1pFuzYXA1iWjFzzsKojykGrGpYZc',
-          },
-        },
-      },
     },
     resolve: {
       alias: {

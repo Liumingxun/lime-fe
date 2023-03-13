@@ -72,7 +72,7 @@ axios.interceptors.response.use(
     Message.error({
       content: error.response.status === 401 ? '>﹏< 登录过期！请重新登录！' : '服务器出错啦！',
       onClose() {
-        window.location.reload()
+        window.location.pathname = '/login'
       },
       duration: 2 * 1000,
     })

@@ -15,6 +15,7 @@ const handleSubmit = () => {
   }).then((data: any) => {
     console.log(data)
     if (data.code === 0) {
+      localStorage.setItem('userid', data.data.userid)
       localStorage.setItem('token', data.data.token)
       router.push({
         name: 'Home',
