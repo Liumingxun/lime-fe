@@ -9,7 +9,7 @@ import { useMainStore } from '@/store'
 import type { Channel, ChannelGroup } from '@/store/modules/main/types'
 
 const mainStore = useMainStore()
-const { selectedChatRoomId, selectedChatRoomDetail } = storeToRefs(mainStore)
+const { selectedChatRoomId, selectedChatRoomDetail, selectedChannelId } = storeToRefs(mainStore)
 
 const groupList = ref<(ChannelGroup & { channel: Channel[] })[]>([])
 const loading = ref(false)
@@ -30,7 +30,7 @@ watchEffect(async () => {
 
 const [confirmModal, toggle] = useToggle(false)
 async function quit() {
-  const res: any = await quitChatRoom(selectedChatRoomId.value)
+  const res: any = await quitChatRoom(selectedChatRoomId.value!)
   toggle()
   if (res.code === 0) {
     selectedChatRoomId.value = ''
@@ -38,6 +38,10 @@ async function quit() {
     return true
   }
   return false
+}
+
+function chooseChannel(channelId: string) {
+  selectedChannelId.value = channelId
 }
 </script>
 
@@ -48,8 +52,8 @@ async function quit() {
   <a-spin v-else :loading="loading">
     <a-layout>
       <a-layout-header>
-        <a-dropdown :popup-max-height="false" style="width: 175px;">
-          <a-button style="width: 100%;position: relative;">
+        <a-dropdown :popup-max-height="false" class="w-175px">
+          <a-button class="w-100% relative">
             {{ chatRoomName }}
             <IconDown />
           </a-button>
@@ -66,7 +70,8 @@ async function quit() {
       <a-layout-content>
         <a-scrollbar style="height:calc(100vh - 32px);overflow: auto;">
           <a-menu
-            style="width: 200px; height: 100%"
+            class="w-200px"
+            @menu-item-click="chooseChannel"
           >
             <a-sub-menu v-for="group in groupList" :key="group.id">
               <template #title>

@@ -1,37 +1,43 @@
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
-import { useMainStore } from '@/store'
+import { onBeforeMount, ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useMainStore, useSocketStore } from '@/store'
 
-const value = ref('')
-const socket = useMainStore().socket
+const msg = ref('')
+const socketStore = useSocketStore()
+const mainStore = useMainStore()
 
-onMounted(() => {
-  socket.emit('ping', Date.now(), (response: unknown) => {
+const { socket } = storeToRefs(socketStore)
+const { selectedChannelId } = storeToRefs(mainStore)
+
+onBeforeMount(() => {
+  socket.value!.emit('ping', Date.now(), (response: unknown) => {
     const data = response as { spendTime: number; sendTime: number }
-    console.log(`${Date.now() - data.sendTime + data.spendTime}ms`)
+    console.log(`${Date.now() - data.sendTime + data.spendTime} ms`)
   })
 })
 
 // userid + message
 function sendMessage() {
-  socket.send({})
+  socket.value!.send({
+    userId: localStorage.getItem('userid'),
+    to: selectedChannelId.value,
+    message: msg.value,
+  })
+  msg.value = ''
 }
 </script>
 
 <template>
   <a-layout>
-    <a-layout-header style="height: 45px">
+    <a-layout-header class="h-45px">
       Header
     </a-layout-header>
     <a-layout-content>
       <a-scrollbar style="height: calc(100vh - 99px); overflow: auto;">
         <div style="height: 1200px" />
       </a-scrollbar>
-      <a-mention v-model="value" type="textarea" :data="['Bytedance', 'Bytedesign', 'Bytenumner']" placeholder="enter something" @keydown.enter="sendMessage">
-        <template #option="{ data }">
-          {{ data }}
-        </template>
-      </a-mention>
+      <a-textarea v-model="msg" @keyup.enter="sendMessage" />
     </a-layout-content>
   </a-layout>
 </template>

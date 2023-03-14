@@ -11,7 +11,7 @@ onBeforeMount(() => {
   mainStore.getMyChatRoomList()
 })
 
-function chooseChatRoom(chatRoomId: string) {
+function chooseChatRoom(chatRoomId: string | undefined) {
   selectedChatRoomId.value = chatRoomId
 }
 
@@ -29,11 +29,11 @@ function backSpace() {
         </template>
         私信
       </a-menu-item>
-      <a-menu-item v-for="(cr) in chatRoomList" :key="cr.id" @click="chooseChatRoom(cr.id)">
+      <a-menu-item v-for="cr in chatRoomList" :key="cr?.id" @click="chooseChatRoom(cr?.id)">
         <template #icon>
           <IconUserGroup />
         </template>
-        {{ cr.name }}
+        {{ cr?.name }}
       </a-menu-item>
     </a-menu>
   </a-scrollbar>

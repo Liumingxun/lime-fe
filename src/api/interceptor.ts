@@ -2,7 +2,7 @@ import axios from 'axios'
 import type { AxiosRequestHeaders } from 'axios'
 import { Message, Modal } from '@arco-design/web-vue'
 
-axios.defaults.baseURL = 'http://localhost:21380'
+axios.defaults.baseURL = 'http://192.168.1.111:21380'
 
 export interface HttpResponse<T = unknown> {
   code: number
